@@ -8,7 +8,8 @@
 --	linux-image-: 内核镜像
 --	linux-image-extra-: 额外的内核模块
 --	linux-headers-: 内核头文件
---	一些内核
+
+--	一些内核：
 --	https://liquorix.net/	--bbr,支持cake算法
 命令1：codename="$(find /etc/apt -type f -name '*.list' | xargs grep -E '^deb' | awk '{print $3}' | grep -Eo '^[a-z]+' | sort | uniq -c | sort -n | tail -n1 | grep -Eo '[a-z]+$')" && sudo apt-get update && sudo apt-get install apt-transport-https && echo -e "deb http://liquorix.net/debian $codename main\ndeb-src http://liquorix.net/debian $codename main\n\n# Mirrors:\n#\n# Unit193 - France\n# deb http://mirror.unit193.net/liquorix $codename main\n# deb-src http://mirror.unit193.net/liquorix $codename main" | sudo tee /etc/apt/sources.list.d/liquorix.list && curl https://liquorix.net/linux-liquorix.pub | sudo apt-key add - && sudo apt-get update
 命令2：sudo apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
@@ -16,6 +17,45 @@
 --	https://xanmod.org/		--bbr,支持cake算法
 命令1： echo 'deb http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-kernel.list && wget -qO - https://dl.xanmod.org/gpg.key | sudo apt-key add -
 命令2： sudo apt update && sudo apt install linux-xanmod
+
+作用： 启用BBR+fq
+命令： echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+命令： echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+命令： sysctl -p
+
+作用： 启用BBR+cake
+命令： echo "net.core.default_qdisc=cake" >> /etc/sysctl.conf
+命令： echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+命令： sysctl -p
+
+作用： 启用BBRplus
+命令： echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+命令： echo "net.ipv4.tcp_congestion_control=bbrplus" >> /etc/sysctl.conf
+命令： sysctl -p
+
+作用： 启用BBR2+FQ
+命令： echo "net.ipv4.tcp_ecn=0" >> /etc/sysctl.conf
+命令： echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+命令： echo "net.ipv4.tcp_congestion_control=bbr2" >> /etc/sysctl.conf
+命令： sysctl -p
+
+作用： 启用BBR2+CAKE
+命令： echo "net.ipv4.tcp_ecn=0" >> /etc/sysctl.conf
+命令： echo "net.core.default_qdisc=cake" >> /etc/sysctl.conf
+命令： echo "net.ipv4.tcp_congestion_control=bbr2" >> /etc/sysctl.conf
+命令： sysctl -p
+
+作用： 启用BBR2+FQ+ecn
+命令： echo "net.ipv4.tcp_ecn=1" >> /etc/sysctl.conf
+命令： echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+命令： echo "net.ipv4.tcp_congestion_control=bbr2" >> /etc/sysctl.conf
+命令： sysctl -p
+
+作用： 启用BBR2+CAKE+ecn
+命令： echo "net.ipv4.tcp_ecn=1" >> /etc/sysctl.conf
+命令： echo "net.core.default_qdisc=cake" >> /etc/sysctl.conf
+命令： echo "net.ipv4.tcp_congestion_control=bbr2" >> /etc/sysctl.conf
+命令： sysctl -p
 
 作用： 卸载内核：
 作用： 首先检查系统中安装的内核镜像。
