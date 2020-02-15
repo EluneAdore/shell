@@ -57,11 +57,11 @@
 命令:	echo "net.ipv4.tcp_congestion_control=bbr2" >> /etc/sysctl.conf
 命令:	sysctl -p
 
-作用:	卸载内核：
 作用:	首先检查系统中安装的内核镜像。
 命令:	dpkg --list|grep linux-image
 命令:	dpkg --list|grep linux-headers
 
+作用:	卸载内核：
 作用:	在列出的内核镜像中，你可以移除一个特定的版本
 命令:	sudo apt-get purge linux-image-* -y
 命令:	sudo apt-get purge linux-headers-* -y
