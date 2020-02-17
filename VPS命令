@@ -18,7 +18,7 @@
 命令1:	echo 'deb http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-kernel.list && wget -qO - https://dl.xanmod.org/gpg.key | sudo apt-key add -
 命令2:	sudo apt update && sudo apt install linux-xanmod
 
-作用:	sysctl.conf里的配置内容保留注释#所在行
+作用:	删除sysctl.conf里的配置内容保留注释#所在行
 命令:	sed '/^#/!d' /etc/sysctl.conf
 
 作用:	启用BBR+fq
