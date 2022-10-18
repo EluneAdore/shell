@@ -72,8 +72,7 @@
 
 作用:	卸载内核：
 作用:	在列出的内核镜像中，你可以移除一个特定的版本
-命令:	sudo apt-get purge linux-image-* -y
-命令:	sudo apt-get purge linux-headers-* -y
+命令:	sudo apt-get purge linux-image-* -y && sudo apt-get purge linux-headers-* -y
 
 作用:	如果GRUB配置由于任何原因在删除旧内核后没有正确升级，你可以尝试手动用update-grub2命令来更新配置。
 命令:	sudo update-grub2
