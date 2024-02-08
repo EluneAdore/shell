@@ -1,5 +1,5 @@
 作用:	debian一键全部升级：
-命令:	sudo apt-get update -y && sudo apt-get upgrade -y
+命令:	sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
 
 作用:	V2Ray 基于 Nginx 的 vmess+ws+tls 一键安装脚本：
 命令:	wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh" && chmod +x install.sh && bash install.sh
