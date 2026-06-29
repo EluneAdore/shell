@@ -15,8 +15,11 @@ curl -s 'https://liquorix.net/install-liquorix.sh' | bash
 ```
 sed -i '/net.ipv4.tcp_ecn/d' /etc/sysctl.d/99-sysctl.conf /etc/sysctl.conf 2>/dev/null; echo "net.ipv4.tcp_ecn=0" >> /etc/sysctl.d/99-sysctl.conf; sysctl --system >/dev/null 2>&1
 ```
-
-5.查看当前运行的算法+查看当前队列算法+查看ECN的开启状态+查看系统内核版本号及系统名称
+5.开启TOF：是一种 TCP 协议扩展技术，‌允许在三次握手未完成时提前传输数据‌，通过加密 Cookie 验证客户端身份，可减少网络连接建立延迟 30% 以上
+```
+sed -i '/net.ipv4.tcp_fastopen/d' /etc/sysctl.d/99-sysctl.conf /etc/sysctl.conf 2>/dev/null; echo "net.ipv4.tcp_fastopen=3" >> /etc/sysctl.d/99-sysctl.conf; sysctl --system
+```
+6.查看当前运行的算法+查看当前队列算法+查看ECN的开启状态+查看系统内核版本号及系统名称
 ```
 echo -e "当前算法: [\e[38;2;0;255;0;1m$(cat /proc/sys/net/ipv4/tcp_congestion_control)\e[0m]\n队列算法: [\e[38;2;0;255;0;1m$(sysctl -n net.core.default_qdisc)\e[0m]\nECN状态:  $([ "$(sysctl -n net.ipv4.tcp_ecn)" -eq 0 ] && echo -e "\e[38;2;0;255;0;1m[关闭]\e[0m" || echo -e "\e[38;2;0;255;0;1m[开启]\e[0m")\n系统内核: [\e[38;2;0;255;0;1m$(uname -sr)\e[0m]"
 ```
