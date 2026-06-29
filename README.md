@@ -16,7 +16,7 @@ curl -s 'https://liquorix.net/install-liquorix.sh' | bash
 echo "net.ipv4.tcp_ecn=0" >> /etc/sysctl.conf && sysctl -p
 ```
 
-5.查看当前支持TCP算法+查看当前运行的算法+查看当前队列算法+查看系统内核版本号及系统名称+查看目录"/proc"下version的信息，也可以得到当前系统的内核版本号及系统名称
+5.查看当前运行的算法+查看当前队列算法+查看ECN的开启状态+查看系统内核版本号及系统名称
 ```
 echo -e "当前算法: [\e[38;2;0;255;0;1m$(cat /proc/sys/net/ipv4/tcp_congestion_control)\e[0m]\n队列算法: [\e[38;2;0;255;0;1m$(sysctl -n net.core.default_qdisc)\e[0m]\nECN状态:  $([ "$(sysctl -n net.ipv4.tcp_ecn)" -eq 0 ] && echo -e "\e[38;2;0;255;0;1m[关闭]\e[0m" || echo -e "\e[38;2;0;255;0;1m[开启]\e[0m")\n系统内核: [\e[38;2;0;255;0;1m$(uname -sr)\e[0m]"
 ```
