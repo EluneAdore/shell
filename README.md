@@ -11,9 +11,9 @@ https://liquorix.net/
 ```
 curl -s 'https://liquorix.net/install-liquorix.sh' | bash
 ```
-4.关闭ECN
+4.关闭ECN：先清除所有ECN相关的旧配置，然后将 net.ipv4.tcp_ecn 的值写入专用的高优先级配置文件 /etc/sysctl.d/99-sysctl.conf 中，最后刷新系统配置
 ```
-echo "net.ipv4.tcp_ecn=0" >> /etc/sysctl.conf && sysctl -p
+sed -i '/net.ipv4.tcp_ecn/d' /etc/sysctl.d/99-sysctl.conf /etc/sysctl.conf 2>/dev/null; echo "net.ipv4.tcp_ecn=0" >> /etc/sysctl.d/99-sysctl.conf; sysctl --system >/dev/null 2>&1
 ```
 
 5.查看当前运行的算法+查看当前队列算法+查看ECN的开启状态+查看系统内核版本号及系统名称
